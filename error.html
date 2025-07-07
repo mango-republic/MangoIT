@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务暂时不可用</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: #f8f9fa;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+        }
+        
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .error-icon {
+            font-size: 72px;
+            color: #ff6b6b;
+            margin-bottom: 25px;
+            animation: pulse 2s infinite;
+        }
+        
+        h1 {
+            font-size: 24px;
+            color: #2d3436;
+            margin-bottom: 20px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .main-message {
+            font-size: 18px;
+            color: #e74c3c;
+            margin-bottom: 12px;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .sub-message {
+            font-size: 15px;
+            color: #636e72;
+            margin-bottom: 35px;
+            line-height: 1.6;
+            max-width: 380px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #4a6cf7;
+            color: white;
+            padding: 12px 35px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(74, 108, 247, 0.25);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:hover {
+            background: #3a5af5;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(74, 108, 247, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .decoration {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(74, 108, 247, 0.08);
+            z-index: 0;
+        }
+        
+        .decoration:nth-child(2) {
+            top: auto;
+            right: auto;
+            bottom: -40px;
+            left: -40px;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 107, 107, 0.08);
+        }
+        
+        footer {
+            margin-top: 40px;
+            color: #95a5a6;
+            font-size: 13px;
+            padding-top: 15px;
+            border-top: 1px solid #f1f2f6;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.9; }
+            50% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.9; }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 25px;
+            }
+            
+            .error-icon {
+                font-size: 60px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .main-message {
+                font-size: 16px;
+            }
+            
+            .sub-message {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decoration"></div>
+        <div class="decoration"></div>
+        
+        <div class="error-icon">
+            <i class="fas fa-exclamation-circle"></i>
+        </div>
+        
+        <h1>服务暂时不可用</h1>
+        
+        <p class="main-message">抱歉，服务出现了一些问题，请稍后重试</p>
+        <p class="sub-message">服务出现了一些问题，稍后我们会为您修复，但这需要一些时间</p>
+        
+        <a href="http://mango-republic.github.io/mangoit/index.html" class="btn">
+            返回首页
+        </a>
+        
+        <footer>
+            <p>Mango Republic IT 服务 &copy; 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
