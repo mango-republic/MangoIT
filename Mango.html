@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mango17：全新一代操作系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF9800;
+            --primary-dark: #F57C00;
+            --secondary: #1976D2;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --white: #fff;
+            --shadow: 0 2px 15px rgba(0,0,0,0.1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Poppins', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 导航栏样式 */
+        .navbar {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            font-size: 28px;
+            transition: var(--transition);
+        }
+        
+        .logo:hover i {
+            transform: rotate(15deg);
+        }
+        
+        .home-link {
+            margin-left: 30px;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+        
+        .home-link:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .home-link:hover:after {
+            width: 100%;
+        }
+        
+        .home-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover:after {
+            width: 100%;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255,152,0,0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            border-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255,152,0,0.3);
+        }
+        
+        /* Hero区域样式 */
+        .hero {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: var(--white);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            opacity: 0.9;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            letter-spacing: -0.5px;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 400;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.1s forwards;
+            opacity: 0;
+        }
+        
+        .hero p {
+            font-size: 1.35rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+        
+        .btn-large {
+            padding: 14px 40px;
+            font-size: 1.15rem;
+            min-width: 180px;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            border: 2px solid var(--secondary);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1565C0;
+            border-color: #1565C0;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(25,118,210,0.3);
+        }
+        
+        /* 特性部分 */
+        .features {
+            padding: 100px 0;
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 15px auto 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .feature-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+        
+        .feature-img {
+            height: 220px;
+            background: linear-gradient(45deg, var(--primary), #ff5722);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+            transition: var(--transition);
+        }
+        
+        .feature-card:hover .feature-img {
+            background: linear-gradient(45deg, var(--primary-dark), #e64a19);
+        }
+        
+        .feature-content {
+            padding: 30px;
+        }
+        
+        .feature-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            color: var(--dark);
+        }
+        
+        .feature-content p {
+            color: var(--gray);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+        
+        /* 版本信息 */
+        .version-info {
+            background: linear-gradient(to right, #f5f5f5, #e0e0e0);
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .version-card {
+            background: var(--white);
+            border-radius: 16px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .version-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .version-card:hover {
+            transform: scale(1.02);
+        }
+        
+        .version-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+        }
+        
+        .version-badge {
+            background: linear-gradient(45deg, var(--primary), #ff5722);
+            color: var(--white);
+            font-size: 1.25rem;
+            font-weight: 700;
+            padding: 10px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(255,152,0,0.3);
+        }
+        
+        .version-card h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .version-card p {
+            color: var(--gray);
+            margin-bottom: 40px;
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .specs {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .spec-item {
+            text-align: center;
+            min-width: 140px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .spec-item.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .spec-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 5px;
+            background: linear-gradient(45deg, var(--primary), #ff5722);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .spec-label {
+            color: var(--gray);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        /* 下载部分 */
+        .download {
+            padding: 100px 0;
+            text-align: center;
+            background-color: var(--white);
+            position: relative;
+        }
+        
+        .download::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, #f0f0f0, transparent);
+            z-index: 0;
+        }
+        
+        .download-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .download-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 50px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .download-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .download-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .download-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .download-card:hover::after {
+            opacity: 1;
+        }
+        
+        .download-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            transition: var(--transition);
+        }
+        
+        .download-card:hover .download-icon {
+            transform: scale(1.1);
+        }
+        
+        .download-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .download-card p {
+            color: var(--gray);
+            margin-bottom: 35px;
+            line-height: 1.7;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: linear-gradient(to bottom, #222, #111);
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links a {
+            color: #bbb;
+            transition: all 0.3s ease;
+            display: inline-block;
+            padding: 5px 0;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+        
+        .footer-links a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+            font-size: 0.95rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .copyright-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .copyright-links a {
+            color: #bbb;
+            transition: all 0.3s ease;
+        }
+        
+        .copyright-links a:hover {
+            color: var(--primary);
+        }
+        
+        .public-security {
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* 登录/注册模态框 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            animation: modalFadeIn 0.4s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        .modal-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255,152,0,0.2);
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+        }
+        
+        .form-message {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* 体验页面 */
+        .experience-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--white);
+            z-index: 1000;
+            padding: 20px;
+        }
+        
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 40px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .back-button:hover {
+            color: var(--primary-dark);
+            transform: translateX(-5px);
+        }
+        
+        .back-button i {
+            margin-right: 8px;
+            font-size: 1.4rem;
+        }
+        
+        .experience-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        .experience-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .experience-content p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 动画关键帧 */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+            .version-card {
+                padding: 40px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            .nav-links {
+                margin: 20px 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 8px 15px;
+            }
+            
+            .hero {
+                padding: 90px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.15rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .features, .version-info, .download {
+                padding: 70px 0;
+            }
+            
+            .specs {
+                gap: 30px;
+            }
+            
+            .download-options {
+                gap: 30px;
+            }
+            
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.3rem;
+            }
+            
+            .version-card {
+                padding: 30px 20px;
+            }
+            
+            .version-card h2 {
+                font-size: 2.2rem;
+            }
+            
+            .spec-item {
+                min-width: 120px;
+            }
+            
+            .spec-value {
+                font-size: 2rem;
+            }
+            
+            .download-card {
+                width: 100%;
+                max-width: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div style="display: flex; align-items: center;">
+                <a href="#" class="logo">
+                    <i class="fas fa-mango"></i>
+                    <span>MangoIT</span>
+                </a>
+                <a href="http://Mnago-republic.github.io/MangoIT/index.html" class="home-link">返回首页</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="http://mango-republic.glthub.io/MangoIT/error.html">产品</a></li>
+                <li><a href="http://mango-republic.glthub.io/MangoIT/error.html">解决方案</a></li>
+                <li><a href="http://mango-republic.glthub.io/MangoIT/error.html">资源</a></li>
+                <li><a href="http://mango-republic.glthub.io/MangoIT/error.html">支持</a></li>
+                <li><a href="http://mango-republic.glthub.io/MangoIT/error.html">企业服务</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button id="loginBtn" class="btn btn-outline">登录</button>
+                <button id="experienceBtn" class="btn btn-primary">立即体验</button>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero区域 -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Mango 17 25H9</h1>
+            <h2>全新一代操作系统</h2>
+            <p>体验下一代操作系统 - 更智能、更快速、更安全。专为现代工作与生活设计。</p>
+            <div class="hero-buttons">
+                <a href="#" id="downloadHeroBtn" class="btn btn-primary btn-large">立即下载</a>
+                <a href="http://mango-republic.glthub.io/MangoIT/error.html" class="btn btn-secondary btn-large">了解更多</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 特性部分 -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>为什么选择Mango?</h2>
+                <p>专为生产力、创造力和安全性而设计的创新操作系统</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>卓越性能</h3>
+                        <p>采用全新Mango内核，启动时间缩短40%，应用响应速度提升60%，让您的工作流程更加流畅高效。</p>
+                        <a href="http://mango-republic.glthub.io/MangoIT/error.html" class="btn btn-outline">了解更多</a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>企业级安全</h3>
+                        <p>内置多层防护机制，实时威胁检测，安全启动和硬件隔离技术，保护您的数据免受最新威胁。</p>
+                        <a href="http://mango-republic.glthub.io/MangoIT/error.html" class="btn btn-outline">了解更多</a>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-img">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>无缝集成</h3>
+                        <p>完美兼容各种硬件设备和软件生态，支持跨平台协作，提供统一的工作体验。</p>
+                        <a href="http://mango-republic.glthub.io/MangoIT/error.html" class="btn btn-outline">了解更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 版本信息 -->
+    <section class="version-info">
+        <div class="container">
+            <div class="version-card">
+                <span class="version-badge">最新版本</span>
+                <h2>Mango 17 25H9</h2>
+                <p>2022年推出以来最重大的更新，包含数百项性能改进和新功能，重新定义操作系统体验</p>
+                <div class="specs">
+                    <div class="spec-item">
+                        <div class="spec-value">60%</div>
+                        <div class="spec-label">性能提升</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value">17.3亿+</div>
+                        <div class="spec-label">活跃用户</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value">99.99%</div>
+                        <div class="spec-label">系统稳定性</div>
+                    </div>
+                    <div class="spec-item">
+                        <div class="spec-value">40%</div>
+                        <div class="spec-label">能耗降低</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 下载部分 -->
+    <section class="download">
+        <div class="container">
+            <div class="section-title">
+                <h2>获取Mango</h2>
+                <p>选择适合您的版本，立即开始体验</p>
+            </div>
+            <div class="download-options">
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>个人版</h3>
+                    <p>为个人用户优化的免费版本，包含所有基本功能，满足日常使用需求</p>
+                    <a href="#" class="btn btn-primary download-personal">免费下载</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>专业版</h3>
+                    <p>为专业人士设计，包含高级工具和生产力功能，提升工作效率</p>
+                    <a href="#" class="btn btn-primary download-pro">购买下载</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>教育版</h3>
+                    <p>专为教育机构设计，提供教学管理工具和学生管理功能</p>
+                    <a href="#" class="btn btn-primary download-education">教育优惠</a>
+                </div>
+                <div class="download-card">
+                    <div class="download-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>企业版</h3>
+                    <p>为大型组织设计，提供增强的安全和管理功能，支持集中部署</p>
+                    <a href="#" class="btn btn-primary download-enterprise">联系销售</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>MangoIT</h3>
+                    <ul class="footer-links">
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>公司简介</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>新闻中心</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>招贤纳士</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>投资者关系</a></li>
+                    </ul>
+                    <div class="social-links">
+                        <a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fab fa-facebook-f"></i></a>
+                        <a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fab fa-twitter"></i></a>
+                        <a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>产品</h3>
+                    <ul class="footer-links">
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>Mango</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>MangoOS</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>MangoDrive</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>MangoIT365会员</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>资源</h3>
+                    <ul class="footer-links">
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>文档中心</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>学习中心</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>开发者社区</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>技术博客</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>支持</h3>
+                    <ul class="footer-links">
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>帮助中心</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>联系我们</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>服务状态</a></li>
+                        <li><a href="http://mango-republic.glthub.io/MangoIT/error.html"><i class="fas fa-chevron-right"></i>反馈建议</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2022-2025 MangoIT Corporation. 保留所有权利。</p>
+                <div class="copyright-links">
+                    <a href="http://Mango-republic.github.io/Mango17/条款.html">服务条款</a>
+                    <a href="http://mango-republic.glthub.io/MangoIT/error.html">隐私政策</a>
+                    <a href="http://mango-republic.glthub.io/MangoIT/error.html">使用条款</a>
+                    <a href="http://mango-republic.glthub.io/MangoIT/error.html">商标声明</a>
+                </div>
+                <div class="public-security">[芒]公安备 A-M071000D211</div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 登录/注册模态框 -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">登录/注册</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="nickname">昵称</label>
+                    <input type="text" id="nickname" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="pin">PIN码</label>
+                    <input type="password" id="pin" class="form-control" required minlength="4" maxlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPin">确认PIN码</label>
+                    <input type="password" id="confirmPin" class="form-control" required minlength="4" maxlength="6">
+                </div>
+                <button type="submit" class="btn btn-primary form-submit">登录/注册</button>
+                <div class="form-message">
+                    点击"登录/注册"即表示您同意我们的<a href="http://Mango-republic.github.io/Mango17/条款.html">服务条款</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- 体验页面 -->
+    <div id="experiencePage" class="experience-page">
+        <div class="container">
+            <div class="back-button" id="backBtn">
+                <i class="fas fa-arrow-left"></i>
+                <span>返回主页</span>
+            </div>
+            <div class="experience-content">
+                <h2>暂未开放体验功能</h2>
+                <p>正在加急开放中…敬请期待！</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 简单的滚动动画效果
+        document.addEventListener('DOMContentLoaded', function() {
+            // 滚动时添加动画
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.feature-card, .download-card, .version-card, .spec-item');
+                elements.forEach(el => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (elementTop < windowHeight * 0.85) {
+                        el.classList.add('animate');
+                    }
+                });
+            };
+            
+            // 监听滚动事件
+            window.addEventListener('scroll', animateOnScroll);
+            // 初始加载时也触发一次
+            animateOnScroll();
+            
+            // 按钮悬停效果增强
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // 登录/注册模态框功能
+            const loginModal = document.getElementById('loginModal');
+            const loginBtn = document.getElementById('loginBtn');
+            const closeModal = document.querySelector('.close-modal');
+            const loginForm = document.getElementById('loginForm');
+            
+            // 打开模态框
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // 关闭模态框
+            closeModal.addEventListener('click', function() {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // 点击模态框外部关闭
+            window.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // 登录/注册表单提交
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const nickname = document.getElementById('nickname').value;
+                const pin = document.getElementById('pin').value;
+                const confirmPin = document.getElementById('confirmPin').value;
+                
+                // 验证PIN长度
+                if (pin.length < 4) {
+                    showPinAlert();
+                    return;
+                }
+                
+                // 验证两次PIN是否一致
+                if (pin !== confirmPin) {
+                    showPinMismatchAlert();
+                    return;
+                }
+                
+                // 存储用户信息到sessionStorage (页面刷新后会丢失)
+                sessionStorage.setItem('mangoUser', JSON.stringify({
+                    nickname: nickname,
+                    pin: pin
+                }));
+                
+                alert(`欢迎${nickname}！登录成功！`);
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                
+                // 更新导航栏按钮
+                loginBtn.textContent = nickname;
+                loginBtn.classList.remove('btn-outline');
+                loginBtn.classList.add('btn-primary');
+            });
+            
+            // 显示PIN长度不足提示
+            function showPinAlert() {
+                const alertDiv = document.createElement('div');
+                alertDiv.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 3000;">
+                        <div style="background: white; padding: 30px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%;">
+                            <h3 style="margin-bottom: 20px; color: #333;">安全提示</h3>
+                            <p style="margin-bottom: 25px; color: #666;">为了确保您的安全，请设置4位及以上的密码</p>
+                            <button id="pinAlertBtn" style="padding: 10px 30px; background: var(--primary); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">确定</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                document.getElementById('pinAlertBtn').addEventListener('click', function() {
+                    document.body.removeChild(alertDiv);
+                });
+            }
+            
+            // 显示PIN不匹配提示
+            function showPinMismatchAlert() {
+                const alertDiv = document.createElement('div');
+                alertDiv.innerHTML = `
+                    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 3000;">
+                        <div style="background: white; padding: 30px; border-radius: 12px; text-align: center; max-width: 400px; width: 90%;">
+                            <h3 style="margin-bottom: 20px; color: #333;">安全提示</h3>
+                            <p style="margin-bottom: 25px; color: #666;">两次输入的PIN码不一致，请重新输入</p>
+                            <button id="pinMismatchBtn" style="padding: 10px 30px; background: var(--primary); color: white; border: none; border-radius: 50px; font-weight: 600; cursor: pointer;">确定</button>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(alertDiv);
+                
+                document.getElementById('pinMismatchBtn').addEventListener('click', function() {
+                    document.body.removeChild(alertDiv);
+                });
+            }
+            
+            // 检查是否已登录
+            const checkLoginStatus = () => {
+                const userData = sessionStorage.getItem('mangoUser');
+                if (userData) {
+                    const user = JSON.parse(userData);
+                    loginBtn.textContent = user.nickname;
+                    loginBtn.classList.remove('btn-outline');
+                    loginBtn.classList.add('btn-primary');
+                }
+            };
+            
+            checkLoginStatus();
+            
+            // 体验页面功能
+            const experienceBtn = document.getElementById('experienceBtn');
+            const experiencePage = document.getElementById('experiencePage');
+            const backBtn = document.getElementById('backBtn');
+            
+            experienceBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 检查登录状态
+                const userData = sessionStorage.getItem('mangoUser');
+                if (!userData) {
+                    loginModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    // 设置登录后继续体验
+                    loginForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        // 处理登录逻辑...
+                        // 登录成功后显示体验页面
+                        experiencePage.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                        loginModal.style.display = 'none';
+                    };
+                } else {
+                    experiencePage.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+            
+            backBtn.addEventListener('click', function() {
+                experiencePage.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // 下载功能
+            const downloadHeroBtn = document.getElementById('downloadHeroBtn');
+            const downloadPersonal = document.querySelector('.download-personal');
+            const downloadPro = document.querySelector('.download-pro');
+            const downloadEducation = document.querySelector('.download-education');
+            const downloadEnterprise = document.querySelector('.download-enterprise');
+            
+            const downloadTxtFile = () => {
+                const content = "当前Mango17不支持从官网获取。请关注我们的官方公告获取最新下载信息。";
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Mango17_download_info.txt';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('由于技术限制，当前Mango17不支持从官网获取。已为您提供说明文件。');
+            };
+            
+            const handleDownload = (e) => {
+                e.preventDefault();
+                
+                // 检查登录状态
+                const userData = sessionStorage.getItem('mangoUser');
+                if (!userData) {
+                    loginModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    // 设置登录后继续下载
+                    loginForm.onsubmit = function(e) {
+                        e.preventDefault();
+                        // 处理登录逻辑...
+                        // 登录成功后执行下载
+                        downloadTxtFile();
+                        loginModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    };
+                } else {
+                    downloadTxtFile();
+                }
+            };
+            
+            downloadHeroBtn.addEventListener('click', handleDownload);
+            downloadPersonal.addEventListener('click', handleDownload);
+            downloadPro.addEventListener('click', handleDownload);
+            downloadEducation.addEventListener('click', handleDownload);
+            downloadEnterprise.addEventListener('click', handleDownload);
+        });
+    </script>
+</body>
+</html>
